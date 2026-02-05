@@ -8,6 +8,10 @@
     <!-- Modern Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     
+    <!-- Calendly Widget Asset (Required for Popup) -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
     <style>
         :root {
             --gold: #C5A059;
@@ -33,23 +37,22 @@
             overflow-x: hidden;
         }
 
-        /* ANTIGRAVITY NAV: Floating Glass Effect */
+        /* Antigravity Navigation */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 5%;
-            position: fixed; /* Locked to top while floating */
+            position: fixed;
             width: 90%;
             left: 5%;
             top: 20px;
             z-index: 1000;
             background: var(--glass);
-            backdrop-filter: blur(15px); /* This creates the floating glass look */
+            backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(197, 160, 89, 0.2);
-            border-radius: 50px; /* Modern pill shape */
-            transition: all 0.4s ease;
+            border-radius: 50px;
         }
 
         .logo {
@@ -68,14 +71,9 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-
-        /* Hero Section with Depth */
+        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -85,9 +83,8 @@
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('hero-bg.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Creates parallax drift */
+            background-attachment: fixed;
             text-align: center;
-            padding: 0 20px;
         }
 
         .hero h1 {
@@ -97,33 +94,87 @@
             color: var(--gold);
             margin: 0;
             text-transform: uppercase;
-            animation: float 6s ease-in-out infinite; /* Antigravity animation */
+            animation: float 6s ease-in-out infinite;
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
         }
 
-        /* ANTIGRAVITY CARDS: Lifting Effect */
+        /* Services Grid (The Engine) */
+        section { padding: 120px 10%; }
+        
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.5rem; 
+            color: var(--gold); 
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
         .service-card {
             background: var(--off-black);
             padding: 40px;
             border: 1px solid rgba(197, 160, 89, 0.1);
             border-radius: 15px;
             text-align: left;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+            color: white;
         }
 
         .service-card:hover {
-            transform: translateY(-20px); /* Lifts off the ground */
+            transform: translateY(-15px);
             border-color: var(--gold);
-            box-shadow: 0 20px 40px rgba(197, 160, 89, 0.15); /* Floating shadow */
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.1);
         }
 
-        /* Rest of the styling remains consistent with V1.4... */
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .duration {
+            font-size: 0.8rem;
+            color: var(--gray);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-weight: 600;
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-top: 20px;
+            display: block;
+        }
+
+        .book-btn {
+            margin-top: 25px;
+            display: inline-block;
+            color: var(--gold);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 5px;
+        }
+
+        /* Global Button Style */
         .btn-gold {
             display: inline-block;
             background-color: var(--gold);
@@ -133,77 +184,114 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 3px;
-            transition: all 0.4s ease;
             border-radius: 5px;
+            transition: 0.3s;
         }
 
-        section { padding: 120px 10%; }
-        .section-title h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); text-align: center; margin-bottom: 50px; }
-        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .price { color: var(--gold); font-weight: 600; font-size: 1.2rem; display: block; margin-top: 15px; }
+        .btn-gold:hover {
+            background-color: var(--white);
+        }
 
-        .calendly-inline-widget { min-width: 320px; height: 750px; border-radius: 15px; overflow: hidden; }
+        /* Portfolio */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
 
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .gallery-item { aspect-ratio: 1/1; border-radius: 15px; overflow: hidden; background: var(--off-black); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.5s; }
-        .gallery-item:hover img { filter: grayscale(0%); transform: scale(1.1); }
+        .gallery-item {
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #111;
+        }
 
-        footer { text-align: center; padding: 50px; border-top: 1px solid #222; font-size: 0.7rem; color: var(--gray); letter-spacing: 2px; }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.5s;
+        }
+
+        .gallery-item:hover img { filter: grayscale(0%); transform: scale(1.05); }
+
+        footer {
+            text-align: center;
+            padding: 60px;
+            border-top: 1px solid #222;
+            font-size: 0.7rem;
+            color: var(--gray);
+            letter-spacing: 2px;
+        }
 
         @media (max-width: 768px) {
             nav { width: 95%; left: 2.5%; top: 10px; }
             .nav-links { display: none; }
+            section { padding: 80px 5%; }
         }
     </style>
 </head>
 <body>
 
-    <nav id="main-nav">
+    <nav>
         <a href="#" class="logo">THE BARBER CO</a>
         <div class="nav-links">
-            <a href="#services">Craft</a>
-            <a href="#booking">Booking</a>
+            <a href="#services">Services</a>
             <a href="#gallery">Portfolio</a>
-            <a href="#contact">Find Us</a>
+            <a href="#contact">Location</a>
         </div>
     </nav>
 
     <section class="hero">
         <h1>THE BARBER CO</h1>
-        <p>ELEVATED GROOMING FOR THE MODERN GENTLEMAN</p>
-        <a href="#booking" class="btn-gold">Secure Appointment</a>
+        <p>ELEVATED GROOMING & TRADITIONAL SERVICE</p>
+        <a href="#services" class="btn-gold">Book Appointment</a>
     </section>
 
+    <!-- DIRECT BOOKING SERVICES SECTION -->
     <section id="services">
-        <div class="section-title"><h2>Our Craft</h2></div>
+        <div class="section-title">
+            <h2>Select Service</h2>
+        </div>
+        
         <div class="service-grid">
-            <div class="service-card">
+            <!-- SERVICE 1 -->
+            <div class="service-card" onclick="Calendly.initPopupWidget({url: 'PASTE_LINK_1_HERE?hide_landing_page_details=1&primary_color=c5a059'});return false;">
+                <span class="duration">30 MINS</span>
                 <h3>The Signature Cut</h3>
-                <p>Precision taper and master styling.</p>
+                <p>Consultation, precision taper/fade, and master styling.</p>
                 <span class="price">£30.00</span>
+                <span class="book-btn">Select Service</span>
             </div>
-            <div class="service-card">
+
+            <!-- SERVICE 2 -->
+            <div class="service-card" onclick="Calendly.initPopupWidget({url: 'PASTE_LINK_2_HERE?hide_landing_page_details=1&primary_color=c5a059'});return false;">
+                <span class="duration">20 MINS</span>
                 <h3>The Royal Shave</h3>
-                <p>Hot towel ritual & straight razor finish.</p>
+                <p>Turkish hot towel ritual and straight-razor finish.</p>
                 <span class="price">£25.00</span>
+                <span class="book-btn">Select Service</span>
             </div>
-            <div class="service-card">
+
+            <!-- SERVICE 3 -->
+            <div class="service-card" onclick="Calendly.initPopupWidget({url: 'PASTE_LINK_3_HERE?hide_landing_page_details=1&primary_color=c5a059'});return false;">
+                <span class="duration">50 MINS</span>
                 <h3>The Full Service</h3>
-                <p>The ultimate grooming combination.</p>
+                <p>Combining the Signature Cut and Royal Shave.</p>
                 <span class="price">£50.00</span>
+                <span class="book-btn">Select Service</span>
+            </div>
+
+            <!-- SERVICE 4 -->
+            <div class="service-card" onclick="Calendly.initPopupWidget({url: 'PASTE_LINK_4_HERE?hide_landing_page_details=1&primary_color=c5a059'});return false;">
+                <span class="duration">20 MINS</span>
+                <h3>Beard Sculpt</h3>
+                <p>Shape, trim, and conditioning treatment.</p>
+                <span class="price">£20.00</span>
+                <span class="book-btn">Select Service</span>
             </div>
         </div>
     </section>
 
-    <section id="booking">
-        <div class="section-title"><h2>Availability</h2></div>
-        <div class="calendly-inline-widget" data-url="https://calendly.com/frshbits-info/30min?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=c5a059&text_color=ffffff&background_color=0a0a0a"></div>
-        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    </section>
-
     <section id="gallery" style="background-color: var(--off-black);">
-        <div class="section-title"><h2>Portfolio</h2></div>
+        <div class="section-title"><h2>The Portfolio</h2></div>
         <div class="gallery-grid">
             <div class="gallery-item"><img src="cut1.jpg" alt="Work 1" onerror="this.style.display='none'"></div>
             <div class="gallery-item"><img src="cut2.jpg" alt="Work 2" onerror="this.style.display='none'"></div>
@@ -214,17 +302,19 @@
 
     <section id="contact">
         <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-            <h3>LOCATED IN SHOREDITCH</h3>
+            <div class="section-title"><h2>Location</h2></div>
             <p>123 Shoreditch High St, London, E1 6AN</p>
-            <form name="antigravity-contact" method="POST" data-netlify="true" style="margin-top: 30px;">
-                <input type="text" name="name" placeholder="NAME" style="width:100%; padding:15px; background:var(--off-black); border:1px solid #333; color:white; margin-bottom:10px;">
-                <button type="submit" class="btn-gold" style="width:100%; border:none; cursor:pointer;">Send Inquiry</button>
+            <p style="color: var(--gray); font-size: 0.8rem; margin-top: 20px;">Mon-Sat: 09:00 - 20:00 | Sun: 10:00 - 17:00</p>
+            
+            <form name="frsh-contact" method="POST" data-netlify="true" style="margin-top: 40px;">
+                <input type="text" name="name" placeholder="YOUR NAME" required style="width:100%; padding:15px; background:var(--off-black); border:1px solid #333; color:white; margin-bottom:10px;">
+                <button type="submit" class="btn-gold" style="width:100%; cursor:pointer; border:none;">Submit Inquiry</button>
             </form>
         </div>
     </section>
 
     <footer>
-        &copy; 2024 THE BARBER CO LONDON. POWERED BY ANTIGRAVITY DESIGN.
+        &copy; 2024 THE BARBER CO LONDON. BUILT WITH FRSH ENGINE TECHNOLOGY.
     </footer>
 
 </body>
